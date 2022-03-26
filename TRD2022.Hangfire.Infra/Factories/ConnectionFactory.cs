@@ -4,17 +4,18 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Text;
-using TRD2022.Hangfire.Models.Cross;
 
 namespace TRD2022.Hangfire.Infra.Factories
 {
     public class ConnectionFactory
     {
         private MySqlConnection Connection;
-        private readonly string connString = AppSettings.ConnString;
+        private string connString = "";
 
-        public ConnectionFactory()
-        { }
+        public ConnectionFactory(string connectionString)
+        {
+            connString = connectionString;
+        }
 
         private MySqlConnection GetConnection()
         {

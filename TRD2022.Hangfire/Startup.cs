@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TRD2022.Hangfire.Models.Cross;
+using TRD2022.Hangfire.Infra.Factories;
 
 namespace TRD2022.Hangfire
 {
@@ -59,6 +60,7 @@ namespace TRD2022.Hangfire
             app.UseAuthorization();
 
             app.UseHangfireDashboard();
+
             RecurringJob.AddOrUpdate(() => Console.WriteLine("teste"), "0 23 * * *");
 
 

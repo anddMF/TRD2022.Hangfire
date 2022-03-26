@@ -18,4 +18,8 @@
     <Folder Include="Services\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TRD2022.Hangfire.Infra\TRD2022.Hangfire.Infra.csproj" />
+  </ItemGroup>
+
 </Project>
