@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TRD2022.Hangfire.Models.Cross;
 
 namespace TRD2022.Hangfire
 {
@@ -28,6 +29,9 @@ namespace TRD2022.Hangfire
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            AppSettings options = Configuration.GetSection("AppConfiguration").Get<AppSettings>();
+            services.AddSingleton(options);
+
             services.AddHangfire(config => config.UseMemoryStorage());
             services.AddHangfireServer();
 
@@ -55,7 +59,7 @@ namespace TRD2022.Hangfire
             app.UseAuthorization();
 
             app.UseHangfireDashboard();
-            RecurringJob.AddOrUpdate(() => Console.WriteLine("yesir"), "0 23 * * *");
+            RecurringJob.AddOrUpdate(() => Console.WriteLine("teste"), "0 23 * * *");
 
 
             app.UseEndpoints(endpoints =>
