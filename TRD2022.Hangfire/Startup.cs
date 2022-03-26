@@ -15,6 +15,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TRD2022.Hangfire.Models.Cross;
 using TRD2022.Hangfire.Infra.Factories;
+using TRD2022.Hangfire.Services;
 
 namespace TRD2022.Hangfire
 {
@@ -60,8 +61,9 @@ namespace TRD2022.Hangfire
             app.UseAuthorization();
 
             app.UseHangfireDashboard();
-
-            RecurringJob.AddOrUpdate(() => Console.WriteLine("teste"), "0 23 * * *");
+            var reportSvc = new ReportService();
+            BackgroundJob.Enqueue(() => reportSvc.ExecuteFileBackup());
+            RecurringJob.AddOrUpdate(() => reportSvc.ExecuteFileBackup(), "0 8 * * *");
 
 
             app.UseEndpoints(endpoints =>

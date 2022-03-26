@@ -13,7 +13,7 @@ namespace TRD2022.Hangfire.Infra.DAL
 
         public FileCommunication(string trdPath)
         {
-            folderPath = trdPath + "\\REPORTS";
+            folderPath = trdPath;
         }
 
         /// <summary>
