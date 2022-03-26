@@ -8,5 +8,6 @@ namespace TRD2022.Hangfire.Models.Cross
     public class AppSettings
     {
         public static string TRDFolder { get; set; }
+        public static string ConnString { get; set; }
     }
 }
