@@ -1,0 +1,43 @@
+{
+  "AppConfiguration": {
+    "ApiConfiguration": {
+      "Key": "CHANGE TEST",
+      "Secret": "",
+      "Address": "https://api.binance.com"
+    },
+    "TradeConfiguration": {
+      "FreeMode": true,
+      "Currency": "USDT",
+      "MaxBuyAmount": 70.0,
+      "MaxToMonitor": 28,
+      "MaxPositionMinutes": 0,
+      "MaxSearchPercentage": 60.0,
+      "MaxOpenPositions": 3,
+      "DaysToAnalyze": 2,
+      "CurrentUSDTProfit": 0.0,
+      "CurrentProfit": 0.0,
+      "MaxProfit": 1.0,
+      "SellPercentage": 0.6,
+      "OwnedSymbols": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "DOWNUSDT",
+        "UPUSDT"
+      ]
+    },
+    "EngineConfiguration": {
+      "Day": false,
+      "Hour": false,
+      "Minute": true,
+      "MovingAverage": false,
+      "MaxDayPositions": 0,
+      "MaxHourPositions": 0,
+      "MaxMinutePositions": 0
+    },
+    "KafkaConfiguration": {
+      "BootstrapServer": "localhost:9092",
+      "Topic": "topic-teste",
+      "Enabled": false
+    }
+  }
+}

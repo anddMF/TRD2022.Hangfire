@@ -43,5 +43,16 @@ namespace TRD2022.Hangfire.Infra.DAL
                 throw ex;
             }
         }
+
+        public string GetJsonContent(string path)
+        {
+            string json = File.ReadAllText(path);
+            return json;
+        }
+
+        public void WriteOnFile(string path, string content)
+        {
+            File.WriteAllText(path, content);
+        }
     }
 }

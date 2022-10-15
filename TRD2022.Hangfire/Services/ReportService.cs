@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,14 +20,35 @@ namespace TRD2022.Hangfire.Services
 
         }
 
+        public void ExecuteJsonChange()
+        {
+            try
+            {
+                string jsonPath = $"D:\\repos\\TRD2022 Ecosystem\\TRD2022.Hangfire\\TRD2022.Hangfire.Infra\\testefile.json";
+                _fileService = new FileCommunication(AppSettings.TRDFolder + "\\REPORTS");
+                string json = _fileService.GetJsonContent(jsonPath);
+
+                CustomerSettings jsonObj = JsonConvert.DeserializeObject<CustomerSettings>(json);
+                jsonObj.AppConfiguration.ApiConfiguration.Key = "CHANGE TEST";
+
+                string output = JsonConvert.SerializeObject(jsonObj, Formatting.Indented);
+                _fileService.WriteOnFile(jsonPath, output);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
         public void ExecuteFileBackup()
         {
             try
             {
                 _fileService = new FileCommunication(AppSettings.TRDFolder + "\\REPORTS");
-                List<Position> positions = _fileService.GetDataFromCsv($"REPORTS-{DateTime.Now.AddDays(-1).ToString("yyyyMMdd")}").Select(x => TransformLineIntoPosition(x)).ToList();
+                //List<Position> positions = _fileService.GetDataFromCsv($"REPORTS-{DateTime.Now.AddDays(-1).ToString("yyyyMMdd")}").Select(x => TransformLineIntoPosition(x)).ToList();
 
-                SendToDB(positions);
+                //SendToDB(positions);
             }
             catch (Exception ex)
             {
@@ -38,7 +60,7 @@ namespace TRD2022.Hangfire.Services
         {
             _dbService = new DBCommunication(AppSettings.ConnString);
             // TODO: find a bulk copy for mysql
-            foreach(Position pos in positions)
+            foreach (Position pos in positions)
             {
                 Dictionary<string, object> param = PositionIntoDictionary(pos);
                 var res = _dbService.ExecuteProc("TRD2022_InsertPosition", param);

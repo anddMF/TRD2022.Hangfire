@@ -62,9 +62,8 @@ namespace TRD2022.Hangfire
 
             app.UseHangfireDashboard();
             var reportSvc = new ReportService();
-            BackgroundJob.Enqueue(() => reportSvc.ExecuteFileBackup());
+            BackgroundJob.Enqueue(() => reportSvc.ExecuteJsonChange());
             RecurringJob.AddOrUpdate(() => reportSvc.ExecuteFileBackup(), "0 8 * * *");
-
 
             app.UseEndpoints(endpoints =>
             {
